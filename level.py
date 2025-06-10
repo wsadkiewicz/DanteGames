@@ -1,35 +1,27 @@
-from game_config import SCREEN_WIDTH, SCREEN_HEIGHT, font
+from game_config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Level:
     def __init__(self):
         self.walls = []
-        self.players = []
+        self.players = {}
+        self.enemies = []
+        self.bullets = []
 
     def add_wall(self, wall):
         self.walls.append(wall)
 
-    def add_player(self, player):
-        self.players.append(player)
+    def add_player(self, player_id, player):
+        self.players[player_id] = player
+
+    def add_enemy(self, enemy):
+        self.enemies.append(enemy)
 
     def update(self, delta_time):
-        for player in self.players:
+        for player in self.players.values():
             player.movement(delta_time, self.walls)
-
-    def draw(self, surface, player_index):
-        if not (0 <= player_index < len(self.players)):
-            raise ValueError("Nieprawidłowy indeks gracza")
-
-        observer = self.players[player_index]
-        cam_x = observer.camera_x
-        cam_y = observer.camera_y
-
-        surface.fill((30, 30, 30))
-
-        for wall in self.walls:
-            wall.draw(surface, cam_x, cam_y)
-
-        for p in self.players:
-            p.draw(surface, cam_x, cam_y)
-
-        pos_text = font.render(f"x: {int(observer.x)}  y: {int(observer.y)}", True, (255, 255, 255))
-        surface.blit(pos_text, (10, 10))
+        for enemy in self.enemies:
+            enemy.movement(delta_time, self.walls)
+        for bullet in self.bullets:
+            bullet.move(delta_time)
+            bullet.check_collision(self.walls, self.players, self.enemies)
+        self.bullets = [b for b in self.bullets if b.alive]

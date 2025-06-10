@@ -5,9 +5,5 @@ class GameObject:
         self.rect = pygame.Rect(x, y, width, height)
         self.color = color
 
-    def draw(self, surface, camera_x, camera_y):
-        screen_rect = self.rect.move(-camera_x, -camera_y)
-        pygame.draw.rect(surface, self.color, screen_rect)
-
     def get_rect(self):
         return self.rect
