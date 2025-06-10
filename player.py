@@ -1,17 +1,19 @@
 import pygame
 import math
+from bullet import Bullet
 from game_config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Player:
-    def __init__(self, keymap=None, color=(255, 0, 0)):
+    def __init__(self, keymap=None, color=(255, 0, 0), player_id=None):
         self.x = 0
         self.y = 0
-        self.speed = 5
+        self.speed = 10
         self.size = 25
         self.camera_x = 0
         self.camera_y = 0
 
         self.color = color
+        self.player_id = player_id
         self.keymap = keymap or {
             "up": None,
             "down": None,
@@ -24,7 +26,7 @@ class Player:
         self.simulated_keys = keys
 
     def movement(self, delta_time, walls):
-        keys = self.simulated_keys if hasattr(self, "simulated_keys") else {}
+        keys = getattr(self, "simulated_keys", {})
         move_x = move_y = 0
         speed = self.speed * (0.5 if keys.get("slow") else 1)
 
@@ -38,8 +40,8 @@ class Player:
             move_x /= length
             move_y /= length
 
-        dx = round(move_x * current_speed * delta_time * 100)
-        dy = round(move_y * current_speed * delta_time * 100)
+        dx = round(move_x * speed * delta_time * 100)
+        dy = round(move_y * speed * delta_time * 100)
 
         step_x = int(math.copysign(1, dx)) if dx != 0 else 0
         for _ in range(abs(dx)):
@@ -59,14 +61,9 @@ class Player:
         self.camera_y = self.y - SCREEN_HEIGHT // 2
 
     def check_collision(self, new_x, new_y, walls):
-        radius = int(self.size * 0.9)
+        radius = int(self.size * 0.8)
         hitbox = pygame.Rect(new_x - radius, new_y - radius, radius * 2, radius * 2)
         for wall in walls:
             if hitbox.colliderect(wall.get_rect()):
                 return True
         return False
-
-    def draw(self, surface, camera_x, camera_y):
-        screen_x = int(self.x - camera_x)
-        screen_y = int(self.y - camera_y)
-        pygame.draw.circle(surface, self.color, (screen_x, screen_y), self.size)
