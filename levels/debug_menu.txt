@@ -1,0 +1,4 @@
+Button 10 10 150 50 load-level1 Level 1
+Button 10 30 150 50 load-test_level Test Level
+Text 400 200 This menu is for launching levels only. It will not appear in actual game.
+Image 600 400 assets/MainScreen.png

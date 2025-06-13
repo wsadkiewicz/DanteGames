@@ -1,0 +1,2 @@
+#Text 400 200 This menu is the main menu of the game.
+Image 550 100 assets/logo_horizontal.png
