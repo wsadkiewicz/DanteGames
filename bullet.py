@@ -4,7 +4,6 @@ import itertools
 
 class Bullet:
     _id_counter = itertools.count(1)
-
     def __init__(self, owner_id, x, y, direction, speed=10, bullet_type=None, damage=10, radius=7, color = (0,255,0)):
         self.id = next(Bullet._id_counter)
         self.owner = owner_id

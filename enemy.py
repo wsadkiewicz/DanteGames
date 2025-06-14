@@ -31,7 +31,7 @@ class Enemy:
 
     def die(self):
         self.alive=False
-
+        
     def movement(self, delta_time, walls):
         # przelicz kąt na radiany
         rad = math.radians(self.direction)
