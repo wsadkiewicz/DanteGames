@@ -1,8 +1,9 @@
 import pygame
 import math
+from healthbar import Healthbar
 
 class Enemy:
-    def __init__(self, enemy_id, enemy_type="default", x=0, y=0, speed=3, direction=0):
+    def __init__(self, enemy_id, enemy_type="default", x=0, y=0, speed=3, direction=0,max_health=100):
         self.enemy_id = enemy_id
         self.enemy_type = enemy_type
         self.x = x
@@ -10,12 +11,27 @@ class Enemy:
         self.speed = speed
         self.direction = direction  # kąt w stopniach (0-359)
         self.size = 25
+        self.max_health = max_health
+        self.health = self.max_health
+        self.healthbar = Healthbar(self, self.max_health, self.enemy_id)
+        self.rect = pygame.Rect(x - self.size, y - self.size, self.size*2, self.size*2)
+        self.alive=True
 
         if enemy_type == "default":
-            self.color = (255, 0, 0)
+            self.color = (60, 60, 60)
         else:
             self.color = (255, 255, 255)
 
+    def take_damage(self, amount):
+        self.health -= amount
+        if self.health <= 0:
+            self.die()
+        else:
+            self.healthbar.update(self.health)
+
+    def die(self):
+        self.alive=False
+        
     def movement(self, delta_time, walls):
         # przelicz kąt na radiany
         rad = math.radians(self.direction)
@@ -46,6 +62,7 @@ class Enemy:
                 # odbicie — odwróć kierunek na osi Y
                 self.direction = (-self.direction) % 360
                 break
+        self.rect.topleft = (self.x - self.size, self.y - self.size)
 
     def check_collision(self, new_x, new_y, walls):
         radius = int(self.size * 0.8)
@@ -57,3 +74,4 @@ class Enemy:
 
     def draw(self, surface, cam_x, cam_y):
         pygame.draw.circle(surface, self.color, (int(self.x - cam_x), int(self.y - cam_y)), self.size)
+        self.healthbar.draw(surface, cam_x, cam_y)
