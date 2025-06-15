@@ -4,7 +4,7 @@ from bullet import Bullet
 from game_config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Player:
-    def __init__(self,keymap=None,color=(0,255,0),player_id=1,x=0,y=0,cam_x=0,cam_y=0,speed=10,size=25,lives=3,bullet_speed=12,power=5):
+    def __init__(self,keymap=None,color=(0,255,0),player_id=1,x=0,y=0,cam_x=0,cam_y=0,speed=10,size=25,lives=3,bullet_speed=12,power=5,bullet_type=["default"]):
         self.x = x
         self.y = y
         self.speed = speed
@@ -14,11 +14,13 @@ class Player:
 
         self.bullet_speed = bullet_speed
         self.power=power
+        self.bullet_type = bullet_type
 
         self.lives=lives
         self.max_lives=lives
-        self.immortal = False
-        self.immortal_timer = 0
+        self.immortal = True
+        self.immortal_timer = 5.0
+        self.shoot_delay = 0
 
         self.color = color
         self.original_color = color
@@ -30,6 +32,7 @@ class Player:
             "right": None,
             "slow": None
         }
+        self.simulated_keys = {}
 
     def draw_lives(self, surface):
         radius = 30
@@ -41,16 +44,46 @@ class Player:
             pygame.draw.circle(surface, color, (x, y), radius)
             pygame.draw.circle(surface, (255, 255, 255), (x, y), radius, 1)
 
-    def take_damage(self):
+    def take_damage(self,damage=1):
         if not self.immortal:
-            self.lives -= 1
+            self.lives -= damage
             self.immortal = True
             self.immortal_timer = 3.0
+        
 
     def simulate_input(self, keys):
         self.simulated_keys = keys
+        self.mouse_pressed = keys.get("mouse_left", False)
+        self.mouse_pos = keys.get("mouse_pos", (0, 0))
 
-    def movement(self, delta_time, walls):
+    def try_shoot(self, bullets, mouse_pos, mouse_click):
+        if self.shoot_delay > 0 or not mouse_click:
+            return
+        cam_x = self.x - SCREEN_WIDTH//2
+        cam_y = self.y - SCREEN_HEIGHT//2
+        world_mouse_x = mouse_pos[0] + cam_x 
+        world_mouse_y = mouse_pos[1] + cam_y
+
+        dx = world_mouse_x - self.x
+        dy = world_mouse_y - self.y
+        angle = math.degrees(math.atan2(dy, dx))
+
+        bullet = Bullet(
+            owner_id=self.player_id,
+            x=self.x,
+            y=self.y,
+            direction=angle,
+            speed=self.bullet_speed,
+            radius=10,
+            damage=self.power,
+            color=self.original_color,
+            bullet_type=self.bullet_type
+        )
+
+        bullets.append(bullet)
+        self.shoot_delay = 0.4
+
+    def movement(self, delta_time, walls, bullets, mouse_pos, mouse_click):
 
         if self.immortal:
             self.immortal_timer -= delta_time
@@ -67,7 +100,8 @@ class Player:
                 else:
                     self.color = tuple(adjust_color(c, +40) for c in self.original_color)
 
-        keys = getattr(self, "simulated_keys", {})
+        #keys = getattr(self, "simulated_keys", {})
+        keys=self.simulated_keys
         move_x = move_y = 0
         speed = self.speed * (0.5 if keys.get("slow") else 1)
 
@@ -81,8 +115,8 @@ class Player:
             move_x /= length
             move_y /= length
 
-        dx = round(move_x * speed * delta_time * 100)
-        dy = round(move_y * speed * delta_time * 100)
+        dx = round(move_x * speed * delta_time * 10)
+        dy = round(move_y * speed * delta_time * 10)
 
         step_x = int(math.copysign(1, dx)) if dx != 0 else 0
         for _ in range(abs(dx)):
@@ -100,6 +134,8 @@ class Player:
 
         self.camera_x = self.x - SCREEN_WIDTH // 2
         self.camera_y = self.y - SCREEN_HEIGHT // 2
+
+        self.try_shoot(bullets,mouse_pos,mouse_click)
 
     def check_collision(self, new_x, new_y, walls):
         radius = int(self.size * 0.8)

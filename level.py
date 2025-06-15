@@ -18,6 +18,8 @@ class Level:
         self.buttons = []
         self.texts = []
         self.images = []
+        self.explosions = []
+        self.multiplayer = False
 
     def add_wall(self, wall):
         self.walls.append(wall)
@@ -36,23 +38,33 @@ class Level:
 
     def update(self, delta_time, mouse_pos=None, mouse_click=False):
         for player in self.players.values():
-            player.movement(delta_time, self.walls)
+            player.movement(delta_time, self.walls, self.bullets, mouse_pos, mouse_click)
+            if player.shoot_delay > 0:
+                player.shoot_delay -= delta_time
+                if player.shoot_delay < 0:
+                    player.shoot_delay = 0
         for enemy in self.enemies[:]:
             if not enemy.alive:
                 self.enemies.remove(enemy)
             else:
-                enemy.movement(delta_time, self.walls)
+                enemy.movement(delta_time, self.walls, self.players)
+                enemy.try_shoot_nearest_player(self.players, self.bullets)
                 for player in self.players.values():
+                    if player.lives <= 0:
+                        if not self.multiplayer:
+                            self=Level()
+                            self.load_from_file("game_over.txt")
+                        else:
+                            print(f"Gracz {player.player_id} stracił wszystkie życia w trybie multiplayer.")
+
                     for enemy in self.enemies:
                         distance = ((player.x - enemy.x)**2 + (player.y - enemy.y)**2)**0.5
                         if distance < player.size + enemy.size:  # kolizja okręgów
                             player.take_damage()
-                            if player.lives <= 0:
-                                self=Level()
-                                self.load_from_file("game_over.txt")
+
         for bullet in self.bullets:
-            bullet.move(delta_time)
-            bullet.check_collision(self.walls, self.players, self.enemies)
+            bullet.move(delta_time,walls=self.walls,players=self.players,enemies=self.enemies)
+            bullet.check_collision(self.walls, self.players, self.enemies, self.explosions)
         self.bullets = [b for b in self.bullets if b.alive]
         new_level = self
         for button in self.buttons:
@@ -66,6 +78,11 @@ class Level:
         if not mouse_click:
             for button in self.buttons:
                 button.reset_click()
+
+        for explosion in self.explosions[:]:
+            explosion.update(delta_time)
+            if not explosion.alive:
+                self.explosions.remove(explosion)
 
         return new_level
 
@@ -123,7 +140,9 @@ class Level:
                         color = eval(stats[2])
                         bullet_speed = int(stats[3])
                         power = int(stats[4])
-                    player = Player(player_id=1,x=0,y=0,cam_x=0,cam_y=0,speed=speed,size=size,color=color,lives=3,bullet_speed=bullet_speed,power=power)
+                        bullet_type_line = stats[5].strip()
+                        bullet_type = bullet_type_line.split()
+                    player = Player(player_id=1,x=0,y=0,cam_x=0,cam_y=0,speed=speed,size=size,color=color,lives=3,bullet_speed=bullet_speed,power=power,bullet_type=bullet_type)
                     self.add_player(1, player)
 
                 elif tokens[0] == "Button" and len(tokens) >= 6:

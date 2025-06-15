@@ -32,9 +32,6 @@ def draw_grid(surface, cam_x, cam_y, grid_size=50):
 
 pygame.init()
 
-shoot_cooldown = 0.25
-time_since_last_shot = shoot_cooldown
-
 player = None
 level = Level()
 level.load_from_file("debug_menu.txt")
@@ -47,7 +44,6 @@ try:
     running = True
     while running:
         dt = clock.tick(60) / 1000
-        time_since_last_shot += dt
         keys = pygame.key.get_pressed()
 
         if player:
@@ -63,24 +59,6 @@ try:
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 running = False
-
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if player and time_since_last_shot >= shoot_cooldown:
-                    mouse_x, mouse_y = pygame.mouse.get_pos()
-                    cam_x = player.x - SCREEN_WIDTH // 2
-                    cam_y = player.y - SCREEN_HEIGHT // 2
-
-                    world_mouse_x = mouse_x + cam_x
-                    world_mouse_y = mouse_y + cam_y
-
-                    dx = world_mouse_x - player.x
-                    dy = world_mouse_y - player.y
-                    angle = math.degrees(math.atan2(dy, dx))
-
-                    bullet = Bullet(owner_id=player.player_id, x=player.x, y=player.y, direction=angle, speed=player.bullet_speed, radius=10, damage=player.power, color = player.original_color)
-                    level.bullets.append(bullet)
-
-                    time_since_last_shot = 0
 
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()[0]
@@ -121,12 +99,13 @@ try:
         for text in level.texts:
             text.draw(screen)
 
+        for explosion in level.explosions:
+            explosion.draw(screen, cam_x, cam_y)
+
         if player:
             pygame.draw.circle(screen, player.color, (
                 int(player.x - cam_x), int(player.y - cam_y)), player.size)
             player.draw_lives(screen)
-            pos_text = font.render(f"x: {int(player.x)} y: {int(player.y)}", True, (255, 255, 255))
-            screen.blit(pos_text, (10, 10))
 
         pygame.display.flip()
 
