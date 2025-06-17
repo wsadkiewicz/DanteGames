@@ -1,4 +1,6 @@
 Player
-Enemy 3 200 default
-Enemy 5 20 default
-Button 10 150 300 50 load-debug_menu Mission Launcher
+Music combat1.mp3
+Enemy 30 20 default
+Enemy 30 20 default
+Enemy 30 20 default
+Enemy 30 20 default

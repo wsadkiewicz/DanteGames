@@ -1,4 +1,14 @@
-Button 10 10 150 50 load-level1 Level 1
-Button 10 30 150 50 load-test_level Test Level
-Text 400 200 This menu is for launching levels only. It will not appear in actual game.
-Image 600 400 assets/MainScreen.png
+Menu
+Button 20 30 150 50 1 load-test_level Test Level
+Button 20 50 150 50 1 change_stat-1-5-1 Speed
+Button 20 70 150 50 1 change_stat-8-0-0 Ricochet
+Button 20 80 150 50 1 change_stat-8-0-0 Explosive
+Button 20 90 150 50 1 change_stat-8-0-0 Homing
+Text 50 20 None This menu is for launching levels only. It will not appear in actual game.
+Text 50 40 8 None
+Image 60 60 assets/MainScreen.png
+Input 10 10 150 50 2 3 player_stats.txt True
+Input 10 30 150 50 1 2 player_stats.txt False
+
+Button 80 50 50 50 2 load_from_launcher Test
+Input 80 60 150 50 3 1 launch_level.txt False

@@ -1,0 +1,19 @@
+Menu <- wczytany poziom będzie menu
+
+Player <- wczytany poziom będzie rozgrywką z graczem
+
+Button x y w h type action text <- typ przycisku oraz jego akcja. Wyjątki:
+  Button x y w h 1 change_stat-8-0-0 Ricochet <- przycisk od atrybutu ricochet
+  Button x y w h 1 change_stat-8-0-0 Explosive <- przycisk od atrybutu explosive
+  Button x y w h 1 change_stat-8-0-0 Homing <- przycisk od atrybutu homing
+
+Text x y None <text> <- wyświetlany tekst (środkowany). Wyjątek:
+  Text x y 8 None <- Wyświetl punkty Dante
+
+Enemy speed health type <- wczytywany przeciwnik
+
+Wall x y w h <- wczytywana ściana do poziomu
+
+Image x y <file> <- wczytywany obrazek
+
+Input x y w h type file_line file_name clear_self <- pole input

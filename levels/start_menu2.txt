@@ -1,0 +1,4 @@
+Image 50 50 assets/background.png
+Image 50 20 assets/logo_horizontal.png
+Button 50 50 210 70 1 load-login_menu Login
+Button 50 70 210 70 1 quit Quit

@@ -1,0 +1,3 @@
+Image 50 50 assets/background.png
+Text 50 50 None Login into your Dante account on https://dante.iis.p.lodz.pl to see your progress.
+Button 10 90 210 70 1 load-main_menu Back

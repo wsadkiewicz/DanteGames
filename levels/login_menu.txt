@@ -1,0 +1,8 @@
+Image 50 50 assets/background.png
+Image 50 20 assets/logo_horizontal.png
+Text 37 40 None Index:
+Text 35 60 None Password:
+Input 50 41 360 60 1 1 trash.txt False
+Input 50 61 360 60 1 2 trash.txt False
+Button 40 75 210 70 1 load-main_menu Login
+Button 60 75 210 70 1 load-start_menu2 Back
