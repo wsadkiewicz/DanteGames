@@ -1,0 +1,10 @@
+Player
+Music HarkonnenRock.mp3
+Text 50 10 None Level 10
+Enemy 60 85 default
+Enemy 60 85 default
+Enemy 60 85 default
+Enemy 60 85 default
+Enemy 75 100 homing
+Enemy 75 100 homing
+Enemy 30 60 shooter

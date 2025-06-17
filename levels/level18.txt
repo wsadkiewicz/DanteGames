@@ -1,0 +1,12 @@
+Player
+Music combat2.mp3
+Text 50 10 None Level 18
+Enemy 70 150 chaser
+Enemy 70 150 chaser
+Enemy 70 150 chaser
+Enemy 70 120 homing
+Enemy 70 120 homing
+Enemy 70 120 homing
+Enemy 40 100 shooter
+Enemy 40 100 shooter
+Enemy 40 100 shooter

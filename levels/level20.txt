@@ -1,0 +1,9 @@
+Player
+Music HarkonnenRock.mp3
+Text 50 10 None Level 20
+Enemy 80 180 gunner
+Enemy 80 180 gunner
+Enemy 80 180 gunner
+Enemy 60 120 shooter
+Enemy 60 120 shooter
+Enemy 60 120 shooter

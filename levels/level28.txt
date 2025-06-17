@@ -1,0 +1,8 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 28
+Enemy 40 350 sniper
+Enemy 40 350 sniper
+Enemy 40 350 sniper
+Enemy 40 350 sniper
+Enemy 40 350 sniper

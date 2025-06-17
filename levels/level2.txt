@@ -1,5 +1,6 @@
 Player
 Music combat2.mp3
+Text 50 10 None Level 2
 Enemy 50 25 default
 Enemy 50 25 default
 Enemy 50 25 default

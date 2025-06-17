@@ -1,0 +1,15 @@
+Player
+Music combat2.mp3
+Text 50 10 None Level 24
+Enemy 70 300 chaser
+Enemy 70 300 chaser
+Enemy 70 300 chaser
+Enemy 70 300 chaser
+Enemy 75 250 homing
+Enemy 75 250 homing
+Enemy 75 250 homing
+Enemy 75 250 homing
+Enemy 40 300 gunner
+Enemy 40 300 gunner
+Enemy 40 300 shooter
+Enemy 40 300 shooter

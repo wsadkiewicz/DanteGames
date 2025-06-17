@@ -1,0 +1,10 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 19
+Enemy 70 150 chaser
+Enemy 70 150 chaser
+Enemy 70 150 chaser
+Enemy 70 150 chaser
+Enemy 70 150 chaser
+Enemy 20 100 shooter
+Enemy 20 100 shooter

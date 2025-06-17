@@ -1,0 +1,10 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 6
+Enemy 60 70 homing
+Enemy 60 70 homing
+Enemy 60 70 homing
+Enemy 60 50 default
+Enemy 60 50 default
+Enemy 60 50 default
+Enemy 60 50 default

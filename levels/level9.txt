@@ -1,0 +1,9 @@
+Player
+Music combat2.mp3
+Text 50 10 None Level 9
+Enemy 40 80 homing
+Enemy 40 80 homing
+Enemy 40 80 homing
+Enemy 40 80 homing
+Enemy 40 80 homing
+Enemy 40 80 homing

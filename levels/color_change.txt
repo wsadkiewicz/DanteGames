@@ -2,4 +2,4 @@ Image 50 50 assets/background.png
 Text 50 30 None Input desired color (Hex: #000000 - #FFFFFF)
 Input 50 40 300 50 2 3 player_stats.txt True
 Button 50 60 150 50 1 load-lobby Return
-Button 60 40 50 50 2 None
+Button 60 40 50 50 2 None >

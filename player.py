@@ -1,7 +1,8 @@
 import pygame
 import math
+import os
 from bullet import Bullet
-from game_config import SCREEN_WIDTH, SCREEN_HEIGHT, Sounds
+from game_config import SCREEN_WIDTH, SCREEN_HEIGHT, Sounds, BASE_DIR_NAME
 
 class Player:
     def __init__(self,keymap=None,color=(0,255,0),player_id=1,x=0,y=0,cam_x=0,cam_y=0,speed=10,size=25,lives=3,bullet_speed=12,power=5,bullet_type=["default"]):
@@ -48,14 +49,20 @@ class Player:
         pygame.draw.circle(screen, self.color, (int(self.x - cam_x), int(self.y - cam_y)), self.size)
 
     def draw_lives(self, surface):
+        heart_full = os.path.join(BASE_DIR_NAME, "assets/heart_full.png")
+        heart_empty = os.path.join(BASE_DIR_NAME, "assets/heart_empty.png")
+        heart_full_alpha = pygame.image.load(heart_full).convert_alpha()
+        heart_empty_alpha = pygame.image.load(heart_empty).convert_alpha()
+        heart_full_alpha = pygame.transform.smoothscale(heart_full_alpha, (90, 90))
+        heart_empty_alpha = pygame.transform.smoothscale(heart_empty_alpha, (90, 90))
         radius = 30
         spacing = 120
         for i in range(self.max_lives):
-            x = 50 + i * spacing
-            y = 50
-            color = (0, 200, 0) if i < self.lives else (0, 0, 0)
-            pygame.draw.circle(surface, color, (x, y), radius)
-            pygame.draw.circle(surface, (255, 255, 255), (x, y), radius, 1)
+            x = 100 + i * spacing
+            y = 100
+            image = heart_full_alpha if i < self.lives else heart_empty_alpha
+            rect = image.get_rect(center=(x, y))
+            surface.blit(image, rect.topleft)
 
     def take_damage(self,damage=1):
         if not self.immortal:

@@ -1,0 +1,11 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 23
+Enemy 50 180 shooter
+Enemy 50 180 shooter
+Enemy 50 180 shooter
+Enemy 50 180 shooter
+Enemy 50 180 shooter
+Enemy 50 180 shooter
+Enemy 60 210 gunner
+Enemy 60 210 gunner

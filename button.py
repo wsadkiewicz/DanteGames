@@ -114,12 +114,12 @@ class Button:
                         stats_val = stats_lines[self.stat_line - 1].strip()
 
                 # Wyświetl tekst pod przyciskiem
-                font = pygame.font.SysFont("arial", 24)
+                font = pygame.font.SysFont("Segoe UI", 24)
                 if self.stat_line != 8:
                     if self.finished:
                         info_text = f"Stat: {stats_val}"
                     else:
-                        info_text = f"Stat: {stats_val}, Cost: {shop_val}"
+                        info_text = f"Stat: {stats_val} Cost: {shop_val}"
                 if self.stat_line == 8:
                     unlocked_values1=stats_lines[7].strip()
                     unlocked_values=unlocked_values1.split()

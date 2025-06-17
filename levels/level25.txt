@@ -1,0 +1,9 @@
+Player
+Music combat2.mp3
+Text 50 10 None Level 25
+Enemy 60 400 gunner
+Enemy 60 400 gunner
+Enemy 60 400 gunner
+Enemy 60 400 gunner
+Enemy 60 400 gunner
+Enemy 60 400 gunner

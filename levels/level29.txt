@@ -1,0 +1,13 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 29
+Enemy 70 200 shooter
+Enemy 70 200 shooter
+Enemy 70 200 shooter
+Enemy 70 200 shooter
+Enemy 70 200 shooter
+Enemy 70 180 sniper
+Enemy 70 180 sniper
+Enemy 70 180 sniper
+Enemy 70 180 sniper
+Enemy 70 180 sniper

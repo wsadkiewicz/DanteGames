@@ -1,0 +1,15 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 8
+Enemy 50 70 default
+Enemy 50 70 default
+Enemy 50 70 default
+Enemy 50 70 default
+Enemy 50 70 default
+Enemy 50 70 default
+Enemy 50 70 default
+Enemy 50 70 default
+Enemy 50 70 default
+Enemy 50 70 default
+Enemy 50 70 default
+Enemy 50 70 default

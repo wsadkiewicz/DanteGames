@@ -1,8 +1,8 @@
-50
+100
 25
 (23,254,218)
-80
-1
-default
-1
-default
+140
+25
+homing
+2
+default homing

@@ -1,0 +1,16 @@
+Player
+Music combat2.mp3
+Text 50 10 None Level 22
+Enemy 85 200 default
+Enemy 85 200 default
+Enemy 85 200 default
+Enemy 85 200 default
+Enemy 85 200 default
+Enemy 85 200 default
+Enemy 85 200 default
+Enemy 85 200 default
+Enemy 85 200 default
+Enemy 85 200 default
+Enemy 50 210 gunner
+Enemy 50 210 gunner
+Enemy 50 210 gunner

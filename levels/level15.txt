@@ -1,0 +1,6 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 15
+Enemy 75 120 chaser
+Enemy 75 120 chaser
+Enemy 75 120 chaser

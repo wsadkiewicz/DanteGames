@@ -1,0 +1,23 @@
+Player
+Music combat2.mp3
+Text 50 10 None Level 17
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
+Enemy 70 90 default
