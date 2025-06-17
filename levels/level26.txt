@@ -1,0 +1,9 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 26
+Enemy 90 200 shooter
+Enemy 90 200 shooter
+Enemy 90 200 shooter
+Enemy 90 200 shooter
+Enemy 20 120 sniper
+Enemy 20 120 sniper

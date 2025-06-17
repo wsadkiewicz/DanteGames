@@ -1,0 +1,10 @@
+Player
+Music combat2.mp3
+Text 50 10 None Level 11
+Enemy 70 90 homing
+Enemy 70 90 homing
+Enemy 70 90 homing
+Enemy 60 80 default
+Enemy 60 80 default
+Enemy 20 100 shooter
+Enemy 20 100 shooter

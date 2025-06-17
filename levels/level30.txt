@@ -1,0 +1,10 @@
+Player
+Music HarkonnenRock.mp3
+Text 50 10 None Level 30
+Enemy 40 500 explosive_sniper
+Enemy 40 500 explosive_sniper
+Enemy 40 230 sniper
+Enemy 40 230 sniper
+Enemy 40 230 sniper
+Enemy 40 230 sniper
+Enemy 40 230 sniper

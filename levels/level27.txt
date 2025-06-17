@@ -1,0 +1,35 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 27
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default
+Enemy 65 200 default

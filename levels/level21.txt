@@ -1,0 +1,7 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 21
+Enemy 30 200 gunner
+Enemy 30 200 gunner
+Enemy 30 200 gunner
+Enemy 30 200 gunner

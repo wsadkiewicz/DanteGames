@@ -10,11 +10,16 @@ class InputBox:
         self.type = type
         self.text = ""
         self.active = False
-        self.font = pygame.font.SysFont("arial", 36)
+        self.font = pygame.font.SysFont("Segoe UI", 30)
         self.clear_self=clear_self
+        self.hovered=False
+        self.scale_factor=1.0
+        self.rescale_offset=1.0
 
+        self.base_rect = pygame.Rect(0, 0, width, height)
+        self.base_rect.center = (x, y)
 
-        self.text_color_default = (120, 0, 160)  # ciemnofioletowy
+        self.text_color_default = (211, 100, 255)  # jasnofioletowy
         self.text_color_error = (255, 0, 0)      # czerwony
         self.current_color = self.text_color_default
 
@@ -55,6 +60,29 @@ class InputBox:
                     self.active = False
             else:
                 self.text += event.unicode
+
+    def update(self, mouse_pos):
+        if self.base_rect.collidepoint(mouse_pos):
+            if not self.hovered:
+                self.hovered = True
+                self._apply_hover_effect()
+        else:
+            if self.hovered:
+                self.hovered = False
+                self._reset_hover_effect()
+
+    def _apply_hover_effect(self):
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        image_path = os.path.join(BASE_DIR, "assets/input_hover.png")
+        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.transform.smoothscale(self.image, (self.width, self.height))
+
+    def _reset_hover_effect(self):
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        image_path = os.path.join(BASE_DIR, "assets/input.png")
+        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.transform.smoothscale(self.image, (self.width, self.height))
+        
 
     def check(self):
         if self.type == 1:

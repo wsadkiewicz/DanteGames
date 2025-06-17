@@ -1,6 +1,6 @@
 Image 50 50 assets/background.png
 Image 50 20 assets/logo_horizontal.png
-Button 50 40 240 80 1 load-lobby Play
-Button 50 54 240 80 1 load-dante Dante
-Button 50 68 240 80 1 load-leaderboard Leaderboard
-Button 50 82 240 80 1 load-login_menu Logout
+Button 50 45 240 80 1 load-lobby Play
+Button 50 55 240 80 1 load-dante Dante
+Button 50 65 240 80 1 load-leaderboard Leaderboard
+Button 50 85 240 80 1 load-login_menu Logout

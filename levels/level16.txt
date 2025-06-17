@@ -1,0 +1,9 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 16
+Enemy 100 100 homing
+Enemy 100 100 homing
+Enemy 100 100 homing
+Enemy 100 120 default
+Enemy 100 120 default
+Enemy 100 120 default

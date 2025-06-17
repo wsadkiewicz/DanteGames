@@ -1,5 +1,6 @@
 Player
 Music combat1.mp3
+Text 50 10 None Level 1
 Enemy 30 20 default
 Enemy 30 20 default
 Enemy 30 20 default

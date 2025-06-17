@@ -1,0 +1,10 @@
+Player
+Music combat1.mp3
+Text 50 10 None Level 13
+Enemy 30 120 shooter
+Enemy 30 120 shooter
+Enemy 70 100 homing
+Enemy 70 100 homing
+Enemy 70 100 homing
+Enemy 70 100 homing
+Enemy 70 100 homing

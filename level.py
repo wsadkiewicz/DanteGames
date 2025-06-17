@@ -136,6 +136,10 @@ class Level:
             if not explosion.alive:
                 self.explosions.remove(explosion)
 
+        for input in self.inputs:
+            if mouse_pos:
+                input.update(mouse_pos)
+
         return new_level
 
     def load_from_file(self, filename):

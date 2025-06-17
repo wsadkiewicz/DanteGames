@@ -1,5 +1,6 @@
 Image 50 50 assets/background.png
 Text 50 40 None Choose Level (you can only enter unlocked levels)
 Input 50 50 300 50 3 1 launch_level.txt False
-Button 60 50 50 50 2 None
-Button 50 60 150 50 1 load_from_launcher Fight
+Button 60 50 50 50 2 None >
+Button 45 60 150 50 1 load_from_launcher Fight
+Button 55 60 150 50 1 load-lobby Return

@@ -1,0 +1,9 @@
+Player
+Music combat2.mp3
+Text 50 10 None Level 3
+Enemy 55 30 default
+Enemy 55 30 default
+Enemy 55 30 default
+Enemy 55 30 default
+Enemy 55 30 default
+Enemy 55 30 default

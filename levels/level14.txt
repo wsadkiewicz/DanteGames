@@ -1,0 +1,15 @@
+Player
+Music combat2.mp3
+Text 50 10 None Level 14
+Enemy 60 100 homing
+Enemy 60 100 homing
+Enemy 60 100 homing
+Enemy 60 100 homing
+Enemy 60 100 homing
+Enemy 60 100 homing
+Enemy 60 100 default
+Enemy 60 100 default
+Enemy 60 100 default
+Enemy 60 100 default
+Enemy 60 100 default
+Enemy 60 100 default
