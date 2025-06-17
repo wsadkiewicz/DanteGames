@@ -1,0 +1,10 @@
+Image 50 50 assets/background.png
+Image 50 15 assets/title_leaderboard.png
+Image 50 50 assets/Rectangle.png
+Text 50 32 None 1. _Ghost_: 120/120
+Text 50 41 None 2. 253812: 16/120
+Text 50 50 None 3. 254481: 8/120
+Text 50 59 None 4. 251312: 7/120
+Text 50 68 None 5. 257812: 4/120
+Text 50 83 None Twoja pozycja: -/-
+Button 10 90 210 70 1 load-main_menu Back

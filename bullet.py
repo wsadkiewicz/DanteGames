@@ -6,7 +6,7 @@ from explosion import Explosion
 class Bullet:
     _id_counter = itertools.count(1)
 
-    def __init__(self, owner_id, x, y, direction, speed=10, bullet_type=None, damage=10, radius=7, color = (0,255,0), bounces = 3,team=None):
+    def __init__(self, owner_id, x, y, direction, speed=10, bullet_type=None, damage=10, radius=7, color = (0,255,0), bounces = 3,team=None, homing_strength=10):
         self.id = next(Bullet._id_counter)
         self.owner = owner_id
         self.x = x
@@ -21,14 +21,15 @@ class Bullet:
         self.bounces = bounces
         self.explosion = None
         self.team=team
+        self.homing_strength=homing_strength
 
     def move(self, delta_time, walls=None, players=None, enemies=None):
         if "homing" in self.type:
             self._homing_move(delta_time, players, enemies)
         else:
             rad = math.radians(self.direction)
-            dx = math.cos(rad) * self.speed * delta_time * 10
-            dy = math.sin(rad) * self.speed * delta_time * 10
+            dx = math.cos(rad) * self.speed * delta_time * 8
+            dy = math.sin(rad) * self.speed * delta_time * 8
             self.x += dx
             self.y += dy
 
@@ -94,8 +95,8 @@ class Bullet:
         bullet_rect = pygame.Rect(int(self.x - self.radius), int(self.y - self.radius), self.radius * 2, self.radius * 2)
 
         rad = math.radians(self.direction)
-        prev_x = self.x - math.cos(rad) * self.speed * 0.1 * 10
-        prev_y = self.y - math.sin(rad) * self.speed * 0.1 * 10
+        prev_x = self.x - math.cos(rad) * self.speed * 0.1 * 8
+        prev_y = self.y - math.sin(rad) * self.speed * 0.1 * 8
 
         collided_x = False
         collided_y = False
@@ -127,7 +128,7 @@ class Bullet:
             if angle_diff > 180:
                 angle_diff -= 360
 
-            max_turn = 3  # stopni na klatkę
+            max_turn = self.homing_strength # stopni na klatkę
             if angle_diff > max_turn:
                 self.direction += max_turn
             elif angle_diff < -max_turn:
@@ -139,8 +140,8 @@ class Bullet:
 
         # Następnie poruszamy się w nowym kierunku
         rad = math.radians(self.direction)
-        dx = math.cos(rad) * self.speed * delta_time * 10
-        dy = math.sin(rad) * self.speed * delta_time * 10
+        dx = math.cos(rad) * self.speed * delta_time * 8
+        dy = math.sin(rad) * self.speed * delta_time * 8
         self.x += dx
         self.y += dy
 

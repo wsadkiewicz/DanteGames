@@ -31,22 +31,25 @@ def draw_grid(surface, cam_x, cam_y, grid_size=50):
 
 
 pygame.init()
+pygame.mixer.init()
 
 player = None
 level = Level()
-level.load_from_file("debug_menu.txt")
-#level.load_from_file("main_menu.txt")
-player = level.players.get(1)
+level.load_from_file("start_menu.txt")
+player = None
+if level.players:
+    player = level.players.get(1)
 if not player:
     print("Gracz nie został wczytany z poziomu.")
 
 try:
     running = True
     while running:
+
         dt = clock.tick(60) / 1000
         keys = pygame.key.get_pressed()
 
-        if player:
+        if player and player.alive:
             simulated_keys = {
                 "up": keys[pygame.K_w],
                 "down": keys[pygame.K_s],
@@ -56,13 +59,16 @@ try:
             }
             player.simulate_input(simulated_keys)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
+        game_events=pygame.event.get()
+        for event in game_events:
+            if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE and level.can_be_paused:
+                player.lives=0
 
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()[0]
-        updated_level = level.update(dt, mouse_pos, mouse_click)
+        updated_level = level.update(dt, mouse_pos, mouse_click, events=game_events)
         if updated_level is not level:
             level = updated_level
             player = level.players.get(1)
@@ -99,13 +105,15 @@ try:
         for text in level.texts:
             text.draw(screen)
 
+        if player and player.alive:
+            player.draw(screen,cam_x,cam_y)
+            player.draw_lives(screen)
+
         for explosion in level.explosions:
             explosion.draw(screen, cam_x, cam_y)
 
-        if player:
-            pygame.draw.circle(screen, player.color, (
-                int(player.x - cam_x), int(player.y - cam_y)), player.size)
-            player.draw_lives(screen)
+        for input in level.inputs:
+            input.draw(screen)
 
         pygame.display.flip()
 

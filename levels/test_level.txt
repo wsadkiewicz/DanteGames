@@ -1,3 +1,10 @@
 Player
-Wall 300 300 100 50
-Button 10 150 300 50 load-debug_menu Mission Launcher
+Enemy 0 10 default
+Enemy 0 10 homing
+Enemy 0 10 chaser
+Enemy 0 10 shooter
+Enemy 0 10 gunner
+Enemy 0 10 sniper
+Enemy 0 10 explosive_sniper
+Enemy 0 10 marauder
+Button 10 80 150 50 1 load-debug_menu Mission Launcher

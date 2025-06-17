@@ -1,5 +1,6 @@
 import pygame
 from enemy import Enemy
+from game_config import Sounds
 
 class Explosion:
     def __init__(self, x, y, radius=400, max_lifetime=0.5, damage=30, owner=None):
@@ -31,6 +32,7 @@ class Explosion:
     def damage_enemies(self, enemies=None, players=None):
         # Zadaj obrażenia raz na start eksplozji
         if self.elapsed_time == 0:
+            Sounds[2].play()
             for enemy in enemies:
                 dx = enemy.x - self.x
                 dy = enemy.y - self.y

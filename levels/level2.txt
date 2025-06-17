@@ -1,0 +1,7 @@
+Player
+Music combat2.mp3
+Enemy 50 25 default
+Enemy 50 25 default
+Enemy 50 25 default
+Enemy 50 25 default
+Enemy 50 25 default

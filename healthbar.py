@@ -30,4 +30,4 @@ class Healthbar:
         pygame.draw.rect(surface, (10, 250, 10), fg_rect)
 
         # Ramka
-        pygame.draw.rect(surface, (0, 0, 0), bg_rect, 1)
+        pygame.draw.rect(surface, (50, 0, 70), bg_rect, 5)

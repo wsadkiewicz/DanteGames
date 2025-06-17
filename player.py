@@ -1,7 +1,7 @@
 import pygame
 import math
 from bullet import Bullet
-from game_config import SCREEN_WIDTH, SCREEN_HEIGHT
+from game_config import SCREEN_WIDTH, SCREEN_HEIGHT, Sounds
 
 class Player:
     def __init__(self,keymap=None,color=(0,255,0),player_id=1,x=0,y=0,cam_x=0,cam_y=0,speed=10,size=25,lives=3,bullet_speed=12,power=5,bullet_type=["default"]):
@@ -22,6 +22,8 @@ class Player:
         self.immortal_timer = 5.0
         self.shoot_delay = 0
 
+        self.alive=True
+
         self.color = color
         self.original_color = color
         self.player_id = player_id
@@ -33,6 +35,17 @@ class Player:
             "slow": None
         }
         self.simulated_keys = {}
+
+    def draw(self, screen, cam_x, cam_y):
+        pos = (int(self.x - cam_x), int(self.y - cam_y))
+        glow_surface = pygame.Surface((self.size * 8, self.size * 8), pygame.SRCALPHA)
+        glow_rect = glow_surface.get_rect(center=pos)
+        for i in range(4, 0, -1):
+            alpha = 80//(i/2)
+            radius = (self.size + i*2) * (self.shoot_delay+1)
+            pygame.draw.circle(glow_surface, (*self.color, alpha), (glow_rect.width // 2, glow_rect.height // 2), radius)
+        screen.blit(glow_surface, glow_rect.topleft)
+        pygame.draw.circle(screen, self.color, (int(self.x - cam_x), int(self.y - cam_y)), self.size)
 
     def draw_lives(self, surface):
         radius = 30
@@ -46,6 +59,7 @@ class Player:
 
     def take_damage(self,damage=1):
         if not self.immortal:
+            Sounds[3].play()
             self.lives -= damage
             self.immortal = True
             self.immortal_timer = 3.0
@@ -59,11 +73,14 @@ class Player:
     def try_shoot(self, bullets, mouse_pos, mouse_click):
         if self.shoot_delay > 0 or not mouse_click:
             return
+        if "explosive" in self.bullet_type:
+            Sounds[1].play()
+        else:
+            Sounds[0].play()
         cam_x = self.x - SCREEN_WIDTH//2
         cam_y = self.y - SCREEN_HEIGHT//2
         world_mouse_x = mouse_pos[0] + cam_x 
         world_mouse_y = mouse_pos[1] + cam_y
-
         dx = world_mouse_x - self.x
         dy = world_mouse_y - self.y
         angle = math.degrees(math.atan2(dy, dx))
@@ -115,8 +132,8 @@ class Player:
             move_x /= length
             move_y /= length
 
-        dx = round(move_x * speed * delta_time * 10)
-        dy = round(move_y * speed * delta_time * 10)
+        dx = round(move_x * speed * delta_time * 8)
+        dy = round(move_y * speed * delta_time * 8)
 
         step_x = int(math.copysign(1, dx)) if dx != 0 else 0
         for _ in range(abs(dx)):
